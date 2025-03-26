@@ -2,6 +2,7 @@ from window import Window
 from point import Point
 from line import Line 
 from cell import Cell
+from maze import Maze
 
 def main():
 
@@ -11,11 +12,11 @@ def main():
     b = Point(400, 300)
     l = Line(a, b)
     color = "black"
-    square = Cell(350, 350, 450, 250, win.canvas)
-    square2 = Cell(550, 350, 650, 250, win.canvas)
-    square.draw(color)
-    square2.draw(color)
-    square.draw_move(square2)
+    maze = Maze(0, 0, 12, 16, 50, 50, win)
+    maze._break_walls_r(0,0)
+    
+    
+    
 
     win.wait_for_close()
 

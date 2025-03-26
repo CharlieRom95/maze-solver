@@ -3,29 +3,39 @@ from point import Point
 from tkinter import Tk, BOTH, Canvas
 
 class Cell():
-    def __init__(self, x1, y1, x2, y2, canvas):
+    def __init__(self, canvas=None, x1=0, y1=0, x2=0, y2=0):
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_top_wall = True
         self.has_bottom_wall = True
+        self.visited = False
         self.x1 = x1
         self.y1 = y1
         self.x2 = x2
         self.y2 = y2
         self._win = canvas
+        
 
     def draw(self, color):
         if self.has_left_wall:
             self._win.create_line(self.x1, self.y1, self.x1, self.y2, fill=color, width=2)
+        else:
+            self._win.create_line(self.x1, self.y1, self.x1, self.y2, fill="white", width=2)
 
         if self.has_right_wall:
             self._win.create_line(self.x2, self.y1, self.x2, self.y2, fill=color, width=2)
+        else:
+            self._win.create_line(self.x2, self.y1, self.x2, self.y2, fill="white", width=2)
 
         if self.has_top_wall:
             self._win.create_line(self.x1, self.y1, self.x2, self.y1, fill=color, width=2)
+        else:
+            self._win.create_line(self.x1, self.y1, self.x2, self.y1, fill="white", width=2)
 
         if self.has_bottom_wall:
             self._win.create_line(self.x1, self.y2, self.x2, self.y2, fill=color, width=2)
+        else:
+            self._win.create_line(self.x1, self.y2, self.x2, self.y2, fill="white", width=2)
 
     def draw_move(self, to_cell, undo=False):
         center_x_1 = (self.x2-self.x1)/2 + self.x1
