@@ -3,21 +3,28 @@ from point import Point
 from line import Line 
 from cell import Cell
 from maze import Maze
+import sys
 
 def main():
 
-    win = Window(800, 600)
+    num_rows = 12
+    num_cols = 16
+    margin = 50
+    screen_x = 800
+    screen_y = 600
+    cell_size_x = (screen_x - 2 * margin) / num_cols
+    cell_size_y = (screen_y - 2 * margin) / num_rows
 
-    a = Point(0, 300)
-    b = Point(400, 300)
-    l = Line(a, b)
-    color = "black"
-    maze = Maze(0, 0, 12, 16, 50, 50, win)
-    maze._break_walls_r(0,0)
-    
-    
-    
+    sys.setrecursionlimit(10000)
+    win = Window(screen_x, screen_y)
 
+    maze = Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win, 10)
+    print("maze created")
+    is_solvable = maze.solve()
+    if not is_solvable:
+        print("maze can not be solved!")
+    else:
+        print("maze solved!")
     win.wait_for_close()
 
 
